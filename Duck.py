@@ -1,42 +1,56 @@
+"""A duck that moves around a simple coordinate grid."""
+
+# Direction name -> (change in x, change in y)
+MOVES = {
+    "forward": (0, 1),
+    "backward": (0, -1),
+    "left": (-1, 0),
+    "right": (1, 0),
+}
+
+
 class Duck:
-    def __init__(self, nam):
-        self.nam = nam
+    """A named duck that keeps track of its position."""
+
+    def __init__(self, name):
+        self.name = name
         self.x = 0
         self.y = 0
 
-    def go_forwd(self):
-        self.y += 1
-        print(f"{self.nam} moved forwd. Now at ({self.x}, {self.y})")
+    @property
+    def position(self):
+        return (self.x, self.y)
 
-    def go_backwd(self):
-        self.y -= 1
-        print(f"{self.nam} moved backwd. Now at ({self.x}, {self.y})")
+    def move(self, direction):
+        """Move one step in the given direction and return the new position.
 
-    def go_left(self):
-        self.x -= 1
-        print(f"{self.nam} moved left. Now at ({self.x}, {self.y})")
+        Raises ValueError if the direction is not one of MOVES.
+        """
+        if direction not in MOVES:
+            raise ValueError(f"Unknown direction: {direction!r}")
+        dx, dy = MOVES[direction]
+        self.x += dx
+        self.y += dy
+        return self.position
 
-    def go_rite(self):
-        self.x += 1
-        print(f"{self.nam} moved rite. Now at ({self.x}, {self.y})")
 
-# run game
-if __name__ == "__main__":
-    name = input("Enter duck name: ")
-    player_duck = Duck(name)
+def main():
+    name = input("Enter duck name: ").strip() or "Duck"
+    duck = Duck(name)
+    options = ", ".join(MOVES)
 
     while True:
-        command = input("Move duck (forwd, backwd, left, rite) or type 'exit' to stop: ").lower()
-        if command == "forwd":
-            player_duck.go_forwd()
-        elif command == "backwd":
-            player_duck.go_backwd()
-        elif command == "left":
-            player_duck.go_left()
-        elif command == "rite":
-            player_duck.go_rite()
-        elif command == "exit":
+        command = input(f"Move duck ({options}) or type 'exit' to stop: ").strip().lower()
+        if command == "exit":
             print("Exiting the game!")
             break
-        else:
+        try:
+            x, y = duck.move(command)
+        except ValueError:
             print("Unknown command, try again.")
+        else:
+            print(f"{duck.name} moved {command}. Now at ({x}, {y})")
+
+
+if __name__ == "__main__":
+    main()
