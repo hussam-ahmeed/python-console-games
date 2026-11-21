@@ -1,60 +1,52 @@
 # Python Console Games
 
-A small collection of beginner-friendly Python console programs demonstrating classes, user input, loops, conditionals, random number generation, and simple game state.
+Two small console games written in plain Python to practice classes, loops, input validation, and writing testable code. No third-party packages are needed.
 
-## Included programs
+## Programs
 
 ### `Game.py` — Number guessing game
 
-Generates a random number from 1 to 100 and guides the player with higher/lower hints until the correct number is guessed. It also counts attempts and handles invalid input.
-
-Run it with:
+The computer picks a number from 1 to 100. You guess, and the game tells you whether your guess is too low or too high until you find it, then shows how many attempts it took. Invalid input and numbers outside 1–100 are rejected without counting as an attempt.
 
 ```bash
 python3 Game.py
 ```
 
-### `Duck.py` — Console movement game
+### `Duck.py` — Duck on a grid
 
-Creates a named duck object that can move forward, backward, left, or right on a simple coordinate grid.
-
-Run it with:
+Name a duck and move it around a coordinate grid starting at (0, 0).
 
 ```bash
 python3 Duck.py
 ```
 
-Available commands:
+Commands: `forward`, `backward`, `left`, `right`, `exit`.
 
-- `forwd`
-- `backwd`
-- `left`
-- `rite`
-- `exit`
+## Tests
+
+The game logic is separated from the input/output code, so it can be tested without typing anything:
+
+```bash
+python3 -m unittest -v
+```
 
 ## Requirements
 
 - Python 3.8 or newer
-- No third-party packages required
 
-## Learning objectives
+## What I practiced
 
-This repository is useful for practicing:
-
-- Python classes and object state
-- Methods and conditionals
+- Classes and object state
+- Separating logic from user interface
 - Input validation with `try`/`except`
-- Loops and program flow
-- The `random` module
-- Running scripts from the command line
+- Unit tests with `unittest`
 
-## Possible improvements
+## Ideas for next steps
 
-- Rename commands and variables for clearer Python style.
-- Add automated tests for movement and guessing logic.
-- Separate game logic from user-interface input.
-- Add a `requirements.txt` only if external dependencies are introduced.
+- Add a difficulty setting (different number ranges) to the guessing game.
+- Add obstacles or a goal square to the duck game.
+- Run the tests automatically with GitHub Actions.
 
 ## License
 
-No license has been declared yet. Add one if you want to define how others may reuse the code.
+No license has been declared yet. Add one (for example MIT) if you want others to reuse the code.
