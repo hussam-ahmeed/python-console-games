@@ -1,34 +1,56 @@
+"""Number guessing game: guess a secret number between 1 and 100."""
+
 import random
 
-# The class that holds the game
-class Gamee:
-    def __init__(self):
-        self.secrt_num = random.randint(1, 100)  # The secret number
-        self.atemptz = 0  # Number of attempts
+MIN_NUMBER = 1
+MAX_NUMBER = 100
 
-    def start_gam(self):
-        print("Welcome to the guessing game!")
-        while True:
-            try:
-                gess = int(input("Enter a number from 1 to 100: "))
-                self.atemptz += 1
-                if self.chek_gess(gess):
-                    break
-            except ValueError:
-                print("Please enter a valid number!")
 
-    def chek_gess(self, gess):
-        if gess < self.secrt_num:
-            print("The number is less than the secret number.")
-            return False
-        elif gess > self.secrt_num:
-            print("The number is greater than the secret number.")
-            return False
+class GuessingGame:
+    """Holds the secret number and counts the player's attempts."""
+
+    def __init__(self, secret_number=None):
+        if secret_number is None:
+            secret_number = random.randint(MIN_NUMBER, MAX_NUMBER)
+        self.secret_number = secret_number
+        self.attempts = 0
+
+    def check_guess(self, guess):
+        """Count the attempt and return 'low', 'high' or 'correct'."""
+        self.attempts += 1
+        if guess < self.secret_number:
+            return "low"
+        if guess > self.secret_number:
+            return "high"
+        return "correct"
+
+
+def read_guess():
+    """Ask for a number until the player enters a valid one in range."""
+    while True:
+        try:
+            guess = int(input(f"Enter a number from {MIN_NUMBER} to {MAX_NUMBER}: "))
+        except ValueError:
+            print("Please enter a valid whole number!")
+            continue
+        if MIN_NUMBER <= guess <= MAX_NUMBER:
+            return guess
+        print(f"The number must be between {MIN_NUMBER} and {MAX_NUMBER}.")
+
+
+def main():
+    game = GuessingGame()
+    print("Welcome to the guessing game!")
+    while True:
+        result = game.check_guess(read_guess())
+        if result == "low":
+            print("Too low, try a higher number.")
+        elif result == "high":
+            print("Too high, try a lower number.")
         else:
-            print(f"Congrats! You guessed the correct number in {self.atemptz} attempts.")
-            return True
+            print(f"Congrats! You guessed the number in {game.attempts} attempts.")
+            break
 
-# Run the game
+
 if __name__ == "__main__":
-    game = Gamee()
-    game.start_gam()
+    main()
