@@ -1,5 +1,7 @@
 # Python Console Games
 
+[![Tests](https://github.com/hussam-ahmeed/python-console-games/actions/workflows/tests.yml/badge.svg)](https://github.com/hussam-ahmeed/python-console-games/actions/workflows/tests.yml)
+
 Two small console games written in plain Python to practice classes, loops, input validation, and writing testable code. No third-party packages are needed.
 
 ## Programs
@@ -45,8 +47,7 @@ python3 -m unittest -v
 
 - Add a difficulty setting (different number ranges) to the guessing game.
 - Add obstacles or a goal square to the duck game.
-- Run the tests automatically with GitHub Actions.
 
 ## License
 
-No license has been declared yet. Add one (for example MIT) if you want others to reuse the code.
+Released under the [MIT License](LICENSE).
